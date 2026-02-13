@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Para mi partner in crime 🍷</title>
     <style>
-        /* --- Estilos Generales y Fondo --- */
+        /* --- Estilos de Fondo y Generales --- */
         body {
-            /* El degradado dramático de rojo vino a negro */
-            background: linear-gradient(to bottom, #4a0000, #000000); 
-            background-color: #0d0d0d; /* Color de respaldo */
+            background: linear-gradient(to bottom, #4a0000, #000000);
             color: #f2f2f2;
             font-family: 'Georgia', 'Times New Roman', serif;
             display: flex;
@@ -21,33 +19,24 @@
             text-align: center;
             padding: 20px;
             box-sizing: border-box;
-            overflow: hidden; /* Importante para que los emojis no generen scroll */
+            overflow: hidden; /* Evita scroll por los emojis */
         }
 
         h1 {
-            color: #ff3333; /* Un rojo más brillante para el título */
+            color: #ff3333;
             text-shadow: 2px 2px 5px #000;
             font-size: 2.5rem;
             margin-bottom: 10px;
-            position: relative;
             z-index: 10;
         }
 
-        p.question {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
-            position: relative;
-            z-index: 10;
-        }
-
-        /* --- Estilos de los Botones --- */
+        /* --- Botones --- */
         .options {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 15px;
             margin-bottom: 30px;
-            position: relative;
             z-index: 10;
         }
 
@@ -57,162 +46,134 @@
             border: 2px solid #8b0000;
             padding: 12px 24px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: 0.3s;
             font-size: 1rem;
-            font-family: inherit;
             border-radius: 4px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
 
         button:hover {
             background-color: #8b0000;
-            color: #fff;
-            box-shadow: 0 0 20px rgba(139, 0, 0, 0.8);
-            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+            transform: scale(1.05);
         }
 
-        button:active {
-            transform: translateY(1px);
-        }
-
-        /* --- Estilos del Contenedor de Imagen y Texto --- */
+        /* --- Contenedor de Imagen y Texto --- */
         #image-container {
             margin-top: 20px;
             width: 100%;
             max-width: 400px;
-            border: 4px solid #5a0000;
+            border: 3px solid #8b0000;
             display: none;
             overflow: hidden;
             border-radius: 12px;
-            background-color: rgba(0, 0, 0, 0.8); /* Fondo semi-transparente */
-            box-shadow: 0 0 30px rgba(139, 0, 0, 0.5);
-            height: auto;
-            padding-bottom: 20px;
-            position: relative;
+            background-color: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
             z-index: 10;
-            animation: popIn 0.5s ease-out;
-        }
-
-        @keyframes popIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+            padding-bottom: 20px;
+            animation: fadeIn 0.8s ease;
         }
 
         img {
             width: 100%;
             height: auto;
-            display: block;
-            border-bottom: 3px solid #5a0000;
+            border-bottom: 2px solid #8b0000;
         }
 
         #image-caption {
-            margin-top: 25px;
-            font-size: 1.5rem;
+            margin-top: 20px;
+            font-size: 1.4rem;
             color: #ffcccc;
             font-style: italic;
-            padding: 0 15px;
-            text-shadow: 2px 2px 4px #000;
+            text-shadow: 1px 1px 2px #000;
         }
 
-        /* --- NUEVO: Estilos para los Emojis de Sangre Flotantes --- */
+        /* --- Efecto Sangre Goteando --- */
+        #blood-overlay {
+            position: fixed;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.imgur.com/7Z4K18u.png') repeat-x;
+            background-size: contain;
+            transition: top 1.5s ease-in;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        /* --- Emojis Flotantes --- */
         .blood-particle {
             position: fixed;
-            bottom: -50px; /* Empiezan justo debajo de la pantalla */
+            bottom: -50px;
             font-size: 2rem;
-            pointer-events: none; /* No interfieren con los clicks */
-            z-index: 100; /* Se muestran por encima de todo */
+            pointer-events: none;
+            z-index: 100;
             animation: floatUp linear forwards;
         }
 
         @keyframes floatUp {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-120vh) rotate(360deg); /* Suben más allá de la pantalla */
-                opacity: 0;
-            }
+            to { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-    <h1>🌹 San Valentín en Mystic Falls, Con Juan Martinez🌹</h1>
-    <p class="question">¿Cuánto querés que dure nuestra amistad?</p>
+    <h1>🌹 San Valentín en Mystic Falls 🌹</h1>
+    <p>¿Cuánto querés que dure nuestra amistad?</p>
 
     <div class="options">
-        <button onclick="showImage('siempre'); createBloodRain();">Para siempre</button>
-        <button onclick="showImage('vampiros'); createBloodRain();">Hasta que seamos vampiros</button>
-        <button onclick="showImage('eternidad'); createBloodRain();">Toda la eternidad (estilo Salvatore)</button>
+        <button onclick="play('siempre')">Para siempre</button>
+        <button onclick="play('vampiros')">Hasta que seamos vampiros</button>
+        <button onclick="play('eternidad')">Toda la eternidad</button>
     </div>
 
     <div id="image-container">
-        <img id="tvd-photo" src="" alt="The Vampire Diaries item">
+        <img id="tvd-photo" src="" alt="The Vampire Diaries">
         <p id="image-caption"></p>
     </div>
 
+    <div id="blood-overlay"></div>
+
     <script>
-        // Función existente para mostrar imagen y texto
-        function showImage(option) {
+        function play(option) {
             const container = document.getElementById('image-container');
             const img = document.getElementById('tvd-photo');
             const caption = document.getElementById('image-caption');
-            
-          const images = {
-                'siempre': 'siempre.jpg',   
-                'vampiros': 'vampiros.jpg',  
-                'eternidad': 'eternidad.jpg'  
-            };
+            const overlay = document.getElementById('blood-overlay');
 
-            const captions = {
-                'siempre': 'Un shot por cada mes de amistad 🥃',
-                'vampiros': 'Bebé para convertirte 🩸',
-                'eternidad': 'Manifiesto 💍'
-            };
+            // 1. Efecto Sangre Goteando
+            overlay.style.top = '0';
+            setTimeout(() => { overlay.style.top = '-100%'; }, 2000);
 
-            // Ocultamos primero para reiniciar la animación de entrada
-            container.style.display = 'none';
-            
-            // Pequeño truco para reiniciar la animación
-            setTimeout(() => {
-                img.src = images[option];
-                caption.textContent = captions[option];
-                container.style.display = 'block';
-            }, 10);
-        }
-
-        // --- NUEVA FUNCIÓN: Lluvia de Sangre con Emojis ---
-        function createBloodRain() {
-            const emojis = ['🩸', '💉', '🍷', '🧛']; // Emojis a usar
-            const particleCount = 20; // Cantidad de emojis por click
-
-            for (let i = 0; i < particleCount; i++) {
-                // Crear el elemento
-                const particle = document.createElement('div');
-                particle.classList.add('blood-particle');
-                particle.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-
-                // Posición horizontal aleatoria (de 0% a 100% del ancho de pantalla)
-                particle.style.left = Math.random() * 100 + 'vw';
-                
-                // Tamaño aleatorio para variedad
-                particle.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
-
-                // Velocidad de animación aleatoria (entre 1s y 3s)
-                const duration = Math.random() * 2 + 1;
-                particle.style.animationDuration = duration + 's';
-
-                // Añadir al cuerpo de la página
-                document.body.appendChild(particle);
-
-                // Limpieza: Eliminar el elemento una vez que termina la animación
-                setTimeout(() => {
-                    particle.remove();
-                }, duration * 1000);
+            // 2. Lluvia de Emojis
+            for (let i = 0; i < 15; i++) {
+                const p = document.createElement('div');
+                p.classList.add('blood-particle');
+                p.innerText = ['🩸', '🧛', '🍷', '💉'][Math.floor(Math.random() * 4)];
+                p.style.left = Math.random() * 100 + 'vw';
+                const duration = Math.random() * 1.5 + 1;
+                p.style.animationDuration = duration + 's';
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), duration * 1000);
             }
+
+            // 3. Datos de Imágenes y Frases
+            // REEMPLAZA ESTOS LINKS CUANDO LOS TENGAS
+            const data = {
+                'siempre': ['https://i.postimg.cc/nrCnbfQG/siempre.jpg', 'Un shot por cada mes de amistad 🥃'],
+                'vampiros': ['https://i.postimg.cc/V6JhzfD2/vampiros.jpg', 'Bebe para convertirte 🩸'],
+                'eternidad': ['https://i.postimg.cc/Y9vPtrbm/eternidad.jpg', 'Manifiesto 💍']
+            };
+
+            img.src = data[option][0];
+            caption.textContent = data[option][1];
+            container.style.display = 'block';
         }
     </script>
-
 </body>
 </html>
